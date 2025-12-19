@@ -6,66 +6,74 @@ let activeLink = null;
 let highlightTimeout;
 
 function showAction(li, link) {
-    const button = li.querySelector('.action-btn');
-    if (!button) return;
+  const button = li.querySelector('.action-btn');
+  if (!button) return;
 
-    // Remove previous focused state
-    if (activeLI) {
-        activeLI.classList.remove('focused');
+  if (activeLI) {
+    activeLI.classList.remove('focused');
+    const oldButton = activeLI.querySelector('.action-btn');
+    if (oldButton) {
+      oldButton.hidden = true;
+      oldButton.setAttribute('aria-hidden', 'true');
     }
+  }
 
-    activeLI = li;
-    activeLink = link;
+  activeLI = li;
+  activeLink = link;
 
-    // Show the button
-    button.hidden = false;
+  button.hidden = false;
+  button.setAttribute('aria-hidden', 'false');
 
-    // Focus the LI instead of the button
-    li.classList.add('focused');
-    li.focus();
+  li.classList.add('focused');
+  li.focus();
 
-    footnoteList.classList.add('highlight');
+  footnoteList.classList.add('highlight');
 
-    // Remove highlight after 3 seconds
-    clearTimeout(highlightTimeout);
-    highlightTimeout = setTimeout(() => {
-        footnoteList.classList.remove('highlight');
-    }, 3000);
+  clearTimeout(highlightTimeout);
+  highlightTimeout = setTimeout(() => {
+    footnoteList.classList.remove('highlight');
+  }, 3000);
 }
 
 function hideAction() {
-    if (!activeLI) return;
+  if (!activeLI) return;
 
-    const button = activeLI.querySelector('.action-btn');
-    if (button) button.hidden = true;
+  const button = activeLI.querySelector('.action-btn');
+  if (button) {
+    button.hidden = true;
+    button.setAttribute('aria-hidden', 'true');
+  }
 
-    activeLI.classList.remove('focused');
-    footnoteList.classList.remove('highlight');
+  activeLI.classList.remove('focused');
+  footnoteList.classList.remove('highlight');
 
-    // Scroll back to the original jump link and focus it
-    if (activeLink) {
-        activeLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        activeLink.focus();
-    }
+  if (activeLink) {
+    activeLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    activeLink.focus();
+  }
 
-    activeLI = null;
-    activeLink = null;
+  activeLI = null;
+  activeLink = null;
 }
 
-// Jump links
 jumpLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.dataset.target;
-        const li = document.getElementById(targetId);
-        if (!li) return;
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.dataset.target;
+    const li = document.getElementById(targetId);
+    if (!li) return;
 
-        li.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        showAction(li, link);
-    });
+    li.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    showAction(li, link);
+  });
 });
 
-// Return buttons
-document.querySelectorAll('button.action-btn').forEach(button => {
-    button.addEventListener('click', hideAction);
+document.querySelectorAll('.action-btn').forEach(button => {
+  button.addEventListener('click', hideAction);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && activeLI) {
+    hideAction();
+  }
 });

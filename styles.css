@@ -10,100 +10,35 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  margin:0;
+  margin: 0;
 }
 
 .plan {
-  display: flex;
   width: 744px;
   padding: 16px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
+  margin-bottom: 1.5rem;
   border-radius: 6px;
   background: #FAFAFA;
-  margin-bottom:1.5rem;
-}
-
-.plan .title {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 0px;
-gap: 4px;
-flex: none;
-order: 0;
-align-self: stretch;
-flex-grow: 0;
-}
-
-.plan .term {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 0px;
-gap: 0px;
-flex: none;
-order: 0;
-align-self: stretch;
-flex-grow: 0;
-}
-
-.plan h3 {
-  font-size:16px;
-  line-height: 24px;
-  margin: 0px;
-}
-
-.plan .subtitle {
-  font-size:12px;
-  line-height:16px;
-  color: #545454;
-  margin: 0px;
-}
-
-.plan .lefttopay {
   display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.plan .lefttopay h4 {
-  margin: 0px;
-}
-
-.plan .data {
-  width:100%;
-}
-  
-.plan .data div {
-  border-bottom: 1px solid #D3D3D3;
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0px;
-}
-
-.plan .data span {
-  display:flex;
-}
-
-.plan .data sup {
-  font-size:10px;
-  font-weight:normal;
-}
-
-.plan .data div h4, .plan .data div p {
-  margin: 0px;
-  font-size: 14px;
-  font-weight: normal;
+.subtitle {
+  font-size: 12px;
   color: #545454;
+}
+
+.lefttopay {
+  display: flex;
+  align-items: center;
 }
 
 .jump-link {
-  text-decoration: none;
   margin-left: 0.25rem;
-  cursor: pointer;
-  font-size:10px;
-  font-weight:normal;
-  color:#545454;
+  font-size: 10px;
+  text-decoration: none;
+  color: #545454;
 }
 
 .jump-link:hover {
@@ -112,13 +47,11 @@ flex-grow: 0;
 
 ol#footnote {
   padding: 0.5rem 1.5rem;
-  transition: background-color 1s ease;
   background: #fff;
-  color:#545454;
-  font-size:12px;
-  line-height:16px;
-  border-radius:6px;
-  margin-bottom:1.5rem;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #545454;
+  transition: background-color 1s ease;
 }
 
 ol#footnote.highlight {
@@ -126,36 +59,35 @@ ol#footnote.highlight {
 }
 
 li {
-  margin: 0.5rem 0rem;
-  font-weight: normal;
+  margin: 0.5rem 0;
+  outline: none;
 }
 
 li.focused {
   font-weight: bold;
-  color:#212121;
+  color: #212121;
+  outline: 2px solid #f5b8d1;
+  border-radius: 4px;
+  padding: 0 0.25rem;
 }
 
 button.action-btn {
   margin-left: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.9rem;
-  background:unset;
-  color:#545454;
-  text-decoration-line:underline;
-  text-decoration-style:solid;
-  text-decoration-thickness:1px;
-  border:unset;
-  cursor:pointer;
-  padding:0;
-  text-underline-offset:4px;
-  position:relative;
-  font-size:12px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  color: #545454;
+  text-decoration: underline;
+  cursor: pointer;
+  text-underline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
   ol#footnote {
     transition: none;
   }
